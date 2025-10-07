@@ -72,3 +72,9 @@ calculadora-curso-git/
 | `dividir(a, b)` | ⏳ Pendiente | Divide dos números |
 | `potencia(base, exp)` | ⏳ Pendiente | Eleva un número a una potencia |
 | `raizCuadrada(num)` | ⏳ Pendiente | Calcula la raíz cuadrada |
+
+## Integrantes
+├── Tomas Blanco
+├── 
+├── 
+└──

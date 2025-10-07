@@ -67,7 +67,7 @@ calculadora-curso-git/
 | Función | Estado | Descripción |
 |---------|--------|-------------|
 | `sumar(a, b)` | ✅ Implementada | Suma dos números |
-| `restar(a, b)` | ⏳ Pendiente | Resta dos números |
+| `restar(a, b)` | ✅ Implemetada | Resta dos números |
 | `multiplicar(a, b)` | ⏳ Pendiente | Multiplica dos números |
 | `dividir(a, b)` | ⏳ Pendiente | Divide dos números |
 | `potencia(base, exp)` | ⏳ Pendiente | Eleva un número a una potencia |
@@ -75,6 +75,6 @@ calculadora-curso-git/
 
 ## Integrantes
 ├── Tomas Blanco
-├── 
+├── Isabel Belinda Yucra
 ├── 
 └──

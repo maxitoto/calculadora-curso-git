@@ -8,11 +8,14 @@ class Calculadora {
   }
 
   multiplicar(a, b) {
-    // TODO: Implementar multiplicación
+    return a * b;
   }
 
   dividir(a, b) {
-    // TODO: Implementar división
+    if (b === 0) {
+      return "Error";
+    }
+    return parseFloat((a / b).toFixed(3));
   }
 
   potencia(base, exponente) {
@@ -38,7 +41,7 @@ console.log('calc.sumar(5, 3):', calc.sumar(5, 3));
 console.log('\nFunciones disponibles:');
 console.log('- calc.sumar(a, b)');
 console.log('- calc.restar(a, b)');
-console.log('- calc.multiplicar(a, b)');
-console.log('- calc.dividir(a, b)');
+console.log('- calc.multiplicar(5, 3)', calc.multiplicar(5, 3));
+console.log('- calc.dividir(10, 0)', calc.dividir(4, 3));
 console.log('- calc.potencia(base, exponente)');
 console.log('- calc.raizCuadrada(numero)');

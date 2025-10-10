@@ -23,7 +23,10 @@ class Calculadora {
   }
 
   raizCuadrada(numero) {
-    // TODO: Implementar raíz cuadrada
+    if (numero<0){
+      return "Error numero negativo: no es posible sacar raiz cuadrada"
+    }
+    return parseFloat (Math.sqrt(numero).toFixed(3))
   }
 }
 

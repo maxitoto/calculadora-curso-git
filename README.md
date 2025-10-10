@@ -78,6 +78,6 @@ calculadora-curso-git/
 ```
 ├── Tomas Blanco
 ├── Isabel Belinda Yucra
-├── 
+├── Ariel rojas
 └──
 ```

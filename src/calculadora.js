@@ -20,7 +20,7 @@ class Calculadora {
   }
 
   potencia(base, exponente) {
-    // TODO: Implementar potencia
+    return parseFloat((base ** exponente).toFixed(3));
   }
 
   raizCuadrada(numero) {

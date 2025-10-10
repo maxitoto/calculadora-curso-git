@@ -64,14 +64,14 @@ calculadora-curso-git/
 
 ## 🔧 Funciones Disponibles
 
-| Función | Estado | Descripción |
-|---------|--------|-------------|
+| Función | Estado         | Descripción |
+|---------|----------------|-------------|
 | `sumar(a, b)` | ✅ Implementada | Suma dos números |
-| `restar(a, b)` | ✅ Implemetada | Resta dos números |
-| `multiplicar(a, b)` | ✅ Implemetada| Multiplica dos números |
-| `dividir(a, b)` | ✅ Implemetada | Divide dos números |
-| `potencia(base, exp)` | ⏳ Pendiente | Eleva un número a una potencia |
-| `raizCuadrada(num)` |  ✅ Implementada | Calcula la raíz cuadrada |
+| `restar(a, b)` | ✅ Implemetada  | Resta dos números |
+| `multiplicar(a, b)` | ✅ Implemetada  | Multiplica dos números |
+| `dividir(a, b)` | ✅ Implemetada  | Divide dos números |
+| `potencia(base, exp)` | ✅ Implementada | Eleva un número a una potencia |
+| `raizCuadrada(num)` | ✅ Implementada | Calcula la raíz cuadrada |
 
 ## Integrantes
 
@@ -79,5 +79,5 @@ calculadora-curso-git/
 ├── Tomas Blanco
 ├── Isabel Belinda Yucra
 ├── Ariel rojas
-└──
+└── Cristian Maidana
 ```

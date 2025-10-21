@@ -1,29 +1,30 @@
-const readline = require('readline');
-const Calculadora = require('./calculadora');
+const readline = require("readline");
+const Calculadora = require("./calculadora");
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
 const calc = new Calculadora();
 
 function mostrarMenu() {
-  console.log('\n=================================');
-  console.log('     CALCULADORA INTERACTIVA     ');
-  console.log('=================================');
-  console.log('1. Sumar');
-  console.log('2. Restar');
-  console.log('3. Multiplicar');
-  console.log('4. Dividir');
-  console.log('5. Potencia');
-  console.log('6. Raíz Cuadrada');
-  console.log('7. Resto');
-  console.log('8. Logaritmo Natural');
-  console.log('9. Logaritmo base 10');
-  console.log('10. Porcentaje de A sobre B')
-  console.log('0. Salir');
-  console.log('=================================');
+  console.log("\n=================================");
+  console.log("     CALCULADORA INTERACTIVA     ");
+  console.log("=================================");
+  console.log("1. Sumar");
+  console.log("2. Restar");
+  console.log("3. Multiplicar");
+  console.log("4. Dividir");
+  console.log("5. Potencia");
+  console.log("6. Raíz Cuadrada");
+  console.log("7. Resto");
+  console.log("8. Logaritmo Natural");
+  console.log("9. Logaritmo base 10");
+  console.log("10. Porcentaje de A sobre B");
+  console.log("11. Valor máximo de varios números");
+  console.log("0. Salir");
+  console.log("=================================");
 }
 
 function pedirNumero(mensaje) {
@@ -36,153 +37,177 @@ function pedirNumero(mensaje) {
 }
 
 async function operacionDosNumeros(operacion, nombreOperacion) {
-  const num1 = await pedirNumero('Ingrese el primer número: ');
-  const num2 = await pedirNumero('Ingrese el segundo número: ');
-  
+  const num1 = await pedirNumero("Ingrese el primer número: ");
+  const num2 = await pedirNumero("Ingrese el segundo número: ");
+
   const resultado = operacion(num1, num2);
-  
+
   if (resultado === undefined) {
     console.log(`\n⚠️  La función ${nombreOperacion} aún no está implementada`);
   } else {
-    console.log(`\n✓ Resultado: ${num1} ${getSimboloOperacion(nombreOperacion)} ${num2} = ${resultado}`);
+    console.log(
+      `\n✓ Resultado: ${num1} ${getSimboloOperacion(
+        nombreOperacion
+      )} ${num2} = ${resultado}`
+    );
   }
 }
 
 async function operacionUnNumero(operacion, nombreOperacion) {
-  const num = await pedirNumero('Ingrese el número: ');
-  
+  const num = await pedirNumero("Ingrese el número: ");
+
   const resultado = operacion(num);
-  
+
   if (resultado === undefined) {
     console.log(`\n⚠️  La función ${nombreOperacion} aún no está implementada`);
   } else if (isNaN(resultado)) {
     console.log(`\n⚠️  Error: Operación inválida (resultado: NaN)`);
-  } else if (nombreOperacion === 'logaritmo natural' || nombreOperacion === 'logaritmo base 10') {
-    console.log(`\n✓ Resultado: ${getSimboloOperacion(nombreOperacion)}(${num}) = ${resultado}`);
-  } 
-    else  {
+  } else if (
+    nombreOperacion === "logaritmo natural" ||
+    nombreOperacion === "logaritmo base 10"
+  ) {
+    console.log(
+      `\n✓ Resultado: ${getSimboloOperacion(
+        nombreOperacion
+      )}(${num}) = ${resultado}`
+    );
+  } else {
     console.log(`\n✓ Resultado: √${num} = ${resultado}`);
   }
 }
 
+async function pedirVariosNumeros() {
+  return new Promise((resolve) => {
+    rl.question(
+      "Ingresá varios números (separados por coma, espacio o punto y coma): ",
+      (respuesta) => {
+        const numeros = respuesta
+          .replace(/[,;]+/g, " ") // reemplazo ',' y ';' por espacio
+          .trim() // quito los espacios al principio y final del string
+          .split(/\s+/) // divido los caracteres por uno o más espacios y se van pasando a un array
+          .map((num) => parseFloat(num)) // convierto los caracteres a numeros (float para ser exactos)
+          .filter((num) => !isNaN(num)); // saco del listado los valores que no son numeros
+
+        resolve(numeros);
+      }
+    );
+  });
+}
+
 function getSimboloOperacion(nombre) {
   const simbolos = {
-    'suma': '+',
-    'resta': '-',
-    'multiplicación': '×',
-    'división': '÷',
-    'potencia': '^',
-    'resto': 'mod',
-    'logaritmo natural': 'ln',
-    'logaritmo base 10': 'log10',
-    'porcentaje':'%'
+    suma: "+",
+    resta: "-",
+    multiplicación: "×",
+    división: "÷",
+    potencia: "^",
+    resto: "mod",
+    "logaritmo natural": "ln",
+    "logaritmo base 10": "log10",
+    porcentaje: "%",
   };
-  return simbolos[nombre] || '';
+  return simbolos[nombre] || "";
 }
 
 async function ejecutarOpcion(opcion) {
-  switch(opcion) {
-    case '1':
-      await operacionDosNumeros(
-        (a, b) => calc.sumar(a, b),
-        'suma'
-      );
+  switch (opcion) {
+    case "1":
+      await operacionDosNumeros((a, b) => calc.sumar(a, b), "suma");
       break;
-    
-    case '2':
-      await operacionDosNumeros(
-        (a, b) => calc.restar(a, b),
-        'resta'
-      );
+
+    case "2":
+      await operacionDosNumeros((a, b) => calc.restar(a, b), "resta");
       break;
-    
-    case '3':
+
+    case "3":
       await operacionDosNumeros(
         (a, b) => calc.multiplicar(a, b),
-        'multiplicación'
+        "multiplicación"
       );
       break;
-    
-    case '4':
-      await operacionDosNumeros(
-        (a, b) => calc.dividir(a, b),
-        'división'
-      );
+
+    case "4":
+      await operacionDosNumeros((a, b) => calc.dividir(a, b), "división");
       break;
-    
-    case '5':
-      const base = await pedirNumero('Ingrese la base: ');
-      const exponente = await pedirNumero('Ingrese el exponente: ');
+
+    case "5":
+      const base = await pedirNumero("Ingrese la base: ");
+      const exponente = await pedirNumero("Ingrese el exponente: ");
       const resultadoPot = calc.potencia(base, exponente);
-      
+
       if (resultadoPot === undefined) {
-        console.log('\n⚠️  La función potencia aún no está implementada');
+        console.log("\n⚠️  La función potencia aún no está implementada");
       } else {
         console.log(`\n✓ Resultado: ${base}^${exponente} = ${resultadoPot}`);
       }
       break;
-    
-    case '6':
-      await operacionUnNumero(
-        (num) => calc.raizCuadrada(num),
-        'raíz cuadrada'
-      );
+
+    case "6":
+      await operacionUnNumero((num) => calc.raizCuadrada(num), "raíz cuadrada");
       break;
 
-    case '7':
-      await operacionDosNumeros(
-        (a, b) => calc.resto(a, b),
-        'resto'
-      );
+    case "7":
+      await operacionDosNumeros((a, b) => calc.resto(a, b), "resto");
       break;
 
-    case '8':
+    case "8":
       await operacionUnNumero(
         (num) => calc.logaritmoNatural(num),
-        'logaritmo natural'
+        "logaritmo natural"
       );
       break;
 
-    case '9':
+    case "9":
       await operacionUnNumero(
         (num) => calc.logaritmoBase10(num),
-        'logaritmo base 10'
-      );
-    break;
-
-    case '10':
-      await operacionDosNumeros(
-        (a, b)=> calc.porcentaje(a,b),
-        'porcentaje'
+        "logaritmo base 10"
       );
       break;
 
-    case '0':
-      console.log('\n¡Hasta luego! 👋');
+    case "10":
+      await operacionDosNumeros((a, b) => calc.porcentaje(a, b), "porcentaje");
+      break;
+
+    case "11":
+      const numeros = await pedirVariosNumeros();
+      if (numeros.length === 0) {
+        console.log("No ingresaste números válidos.");
+        break;
+      }
+      const resultadoMax = calc.maximo(numeros);
+      if (resultadoMax === undefined) {
+        console.log("La función máximo aún no está implementada");
+      } else {
+        console.log(`Resultado: El número máximo es ${resultadoMax}`);
+      }
+      break;
+
+    case "0":
+      console.log("\n¡Hasta luego! 👋");
       rl.close();
       return false;
-    
+
     default:
-      console.log('\n⚠️  Opción inválida. Por favor intente nuevamente.');
+      console.log("\n⚠️  Opción inválida. Por favor intente nuevamente.");
   }
-  
+
   return true;
 }
 
 async function iniciar() {
   let continuar = true;
-  
+
   while (continuar) {
     mostrarMenu();
-    
+
     const opcion = await new Promise((resolve) => {
-      rl.question('\nSeleccione una opción: ', resolve);
+      rl.question("\nSeleccione una opción: ", resolve);
     });
-    
+
     continuar = await ejecutarOpcion(opcion);
   }
 }
 
 // Iniciar el cliente
-console.log('Bienvenido a la Calculadora Interactiva');
+console.log("Bienvenido a la Calculadora Interactiva");
 iniciar();

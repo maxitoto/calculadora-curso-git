@@ -57,6 +57,11 @@ class Calculadora {
     if (b === 0) return "Error";
     return (a / b) * 100;
   }
+
+  maximo(arr) {
+    if (!Array.isArray(arr) || arr.length === 0) return undefined;
+    return Math.max(...arr);
+  }
 }
 
 // Exportar para usar en tests

@@ -4,8 +4,7 @@ class Calculadora {
   }
 
   restar(a, b) {
-    return a-b;
-    
+    return a - b;
   }
 
   multiplicar(a, b) {

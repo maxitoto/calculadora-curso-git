@@ -32,12 +32,14 @@ class Calculadora {
 
   resto(a, b) {
     if(b === 0) return "Error";
-    
+    return a % b;
+    /*
     const division = this.dividir(a, b);
 
     const cociente = Math.floor(division);
 
     return a - cociente * b;
+    */
   }
 
   logaritmoNatural(numero){

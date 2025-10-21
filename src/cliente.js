@@ -21,6 +21,7 @@ function mostrarMenu() {
   console.log('7. Resto');
   console.log('8. Logaritmo Natural');
   console.log('9. Logaritmo base 10');
+  console.log('10. Porcentaje de A sobre B')
   console.log('0. Salir');
   console.log('=================================');
 }
@@ -73,7 +74,8 @@ function getSimboloOperacion(nombre) {
     'potencia': '^',
     'resto': 'mod',
     'logaritmo natural': 'ln',
-    'logaritmo base 10': 'log10'
+    'logaritmo base 10': 'log10',
+    'porcentaje':'%'
   };
   return simbolos[nombre] || '';
 }
@@ -141,13 +143,19 @@ async function ejecutarOpcion(opcion) {
       );
       break;
 
-
     case '9':
       await operacionUnNumero(
         (num) => calc.logaritmoBase10(num),
         'logaritmo base 10'
       );
     break;
+
+    case '10':
+      await operacionDosNumeros(
+        (a, b)=> calc.porcentaje(a,b),
+        'porcentaje'
+      );
+      break;
 
     case '0':
       console.log('\n¡Hasta luego! 👋');

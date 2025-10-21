@@ -29,6 +29,16 @@ class Calculadora {
     }
     return parseFloat (Math.sqrt(numero).toFixed(3))
   }
+
+  resto(a, b) {
+    if(b === 0) return "Error";
+    
+    const division = this.dividir(a, b);
+
+    const cociente = Math.floor(division);
+
+    return a - cociente * b;
+  }
 }
 
 // Exportar para usar en tests
@@ -45,7 +55,8 @@ console.log('calc.sumar(5, 3):', calc.sumar(5, 3));
 console.log('\nFunciones disponibles:');
 console.log('- calc.sumar(a, b)');
 console.log('- calc.restar(a, b)');
-console.log('- calc.multiplicar(5, 3)', calc.multiplicar(5, 3));
-console.log('- calc.dividir(10, 0)', calc.dividir(4, 3));
+console.log('- calc.multiplicar(a, b)');
+console.log('- calc.dividir(a, b)');
 console.log('- calc.potencia(base, exponente)');
 console.log('- calc.raizCuadrada(numero)');
+console.log('- calc.resto(a, b)');

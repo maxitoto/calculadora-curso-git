@@ -86,5 +86,6 @@ calculadora-curso-git/
 ├── Tomas Blanco
 ├── Isabel Belinda Yucra
 ├── Ariel rojas
-└── Cristian Maidana
+├── Cristian Maidana
+└── Barrera Daniel
 ```

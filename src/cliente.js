@@ -19,6 +19,8 @@ function mostrarMenu() {
   console.log('5. Potencia');
   console.log('6. Raíz Cuadrada');
   console.log('7. Resto');
+  console.log('8. Logaritmo Natural');
+  console.log('9. Logaritmo base 10');
   console.log('0. Salir');
   console.log('=================================');
 }
@@ -54,7 +56,10 @@ async function operacionUnNumero(operacion, nombreOperacion) {
     console.log(`\n⚠️  La función ${nombreOperacion} aún no está implementada`);
   } else if (isNaN(resultado)) {
     console.log(`\n⚠️  Error: Operación inválida (resultado: NaN)`);
-  } else {
+  } else if (nombreOperacion === 'logaritmo natural' || nombreOperacion === 'logaritmo base 10') {
+    console.log(`\n✓ Resultado: ${getSimboloOperacion(nombreOperacion)}(${num}) = ${resultado}`);
+  } 
+    else  {
     console.log(`\n✓ Resultado: √${num} = ${resultado}`);
   }
 }
@@ -66,7 +71,9 @@ function getSimboloOperacion(nombre) {
     'multiplicación': '×',
     'división': '÷',
     'potencia': '^',
-    'resto': 'mod'
+    'resto': 'mod',
+    'logaritmo natural': 'ln',
+    'logaritmo base 10': 'log10'
   };
   return simbolos[nombre] || '';
 }
@@ -126,6 +133,21 @@ async function ejecutarOpcion(opcion) {
         'resto'
       );
       break;
+
+    case '8':
+      await operacionUnNumero(
+        (num) => calc.logaritmoNatural(num),
+        'logaritmo natural'
+      );
+      break;
+
+
+    case '9':
+      await operacionUnNumero(
+        (num) => calc.logaritmoBase10(num),
+        'logaritmo base 10'
+      );
+    break;
 
     case '0':
       console.log('\n¡Hasta luego! 👋');

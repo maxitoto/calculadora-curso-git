@@ -39,6 +39,18 @@ class Calculadora {
 
     return a - cociente * b;
   }
+
+  logaritmoNatural(numero){
+    if(numero <= 0) return "Error";
+
+    return parseFloat(Math.log(numero).toFixed(3));
+  }
+
+  logaritmoBase10(numero){
+    if(numero <= 0) return "Error"
+
+    return parseFloat(Math.log10(numero).toFixed(3));
+  }
 }
 
 // Exportar para usar en tests
@@ -60,3 +72,5 @@ console.log('- calc.dividir(a, b)');
 console.log('- calc.potencia(base, exponente)');
 console.log('- calc.raizCuadrada(numero)');
 console.log('- calc.resto(a, b)');
+console.log('- calc.logaritmoNatural(numero)');
+console.log('- calc.logaritmoBase10(numero)');

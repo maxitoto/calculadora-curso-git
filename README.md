@@ -46,6 +46,8 @@ Verás un menú como este:
 5. Potencia
 6. Raíz Cuadrada
 7. Resto
+8. Logaritmo Natural
+9. Logaritmo Base 10
 0. Salir
 =================================
 ```
@@ -74,6 +76,9 @@ calculadora-curso-git/
 | `potencia(base, exp)` | ✅ Implementada | Eleva un número a una potencia |
 | `raizCuadrada(num)` | ✅ Implementada | Calcula la raíz cuadrada |
 | `resto(a, b)` | ✅ Implementada | Calcula el resto de una división |
+| `logaritmoNatural(num)` | ✅ Implementada | Calcula el logaritmo natural de un número |
+| `logaritmoBase10(num)` | ✅ Implementada | Calcula el logaritmo base 10 de un número |
+
 
 ## Integrantes
 

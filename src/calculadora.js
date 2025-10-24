@@ -32,13 +32,6 @@ class Calculadora {
   resto(a, b) {
     if (b === 0) return "Error";
     return a % b;
-    /*
-    const division = this.dividir(a, b);
-
-    const cociente = Math.floor(division);
-
-    return a - cociente * b;
-    */
   }
 
   logaritmoNatural(numero) {
@@ -59,7 +52,7 @@ class Calculadora {
   }
 
   maximo(arr) {
-    if (!Array.isArray(arr) || arr.length === 0) return undefined;
+    if (!Array.isArray(arr) || arr.length === 0) return "Error";
     return Math.max(...arr);
   }
 }
@@ -86,3 +79,5 @@ console.log("- calc.resto(a, b)");
 console.log("- calc.logaritmoNatural(numero)");
 console.log("- calc.logaritmoBase10(numero)");
 console.log("- calc.porcentaje(a, b)");
+
+

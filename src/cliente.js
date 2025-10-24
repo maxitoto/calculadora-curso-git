@@ -36,6 +36,15 @@ function pedirNumero(mensaje) {
   });
 }
 
+function pedirVariosNumeros(mensaje) {
+  return new Promise((resolve) => {
+    rl.question(mensaje, (respuesta) => {
+      const numeros = respuesta.split(" ").map((num) => parseFloat(num));
+      resolve(numeros);
+    });
+  });
+}
+
 async function operacionDosNumeros(operacion, nombreOperacion) {
   const num1 = await pedirNumero("Ingrese el primer número: ");
   const num2 = await pedirNumero("Ingrese el segundo número: ");
@@ -53,6 +62,22 @@ async function operacionDosNumeros(operacion, nombreOperacion) {
   }
 }
 
+async function operacionVariosNumeros(operacion, nombreOperacion) {
+  const numeros = await pedirVariosNumeros("Ingrese los números separados por espacios: ");
+
+  const resultado = operacion(numeros);
+
+  if (resultado === undefined) {
+    console.log(`\n⚠️  La función ${nombreOperacion} aun no esta implementada`);
+  } else if (isNaN(resultado)) {
+    console.log(`\n⚠️  Error: Operación inválida (resultado: NaN)`);
+  } else {
+    console.log(
+      `\n✓ Resultado: [${numeros.join(" ")}] ${getSimboloOperacion(nombreOperacion)} = ${resultado}`
+    );
+  }
+}
+
 async function operacionUnNumero(operacion, nombreOperacion) {
   const num = await pedirNumero("Ingrese el número: ");
 
@@ -62,36 +87,9 @@ async function operacionUnNumero(operacion, nombreOperacion) {
     console.log(`\n⚠️  La función ${nombreOperacion} aún no está implementada`);
   } else if (isNaN(resultado)) {
     console.log(`\n⚠️  Error: Operación inválida (resultado: NaN)`);
-  } else if (
-    nombreOperacion === "logaritmo natural" ||
-    nombreOperacion === "logaritmo base 10"
-  ) {
-    console.log(
-      `\n✓ Resultado: ${getSimboloOperacion(
-        nombreOperacion
-      )}(${num}) = ${resultado}`
-    );
   } else {
-    console.log(`\n✓ Resultado: √${num} = ${resultado}`);
+    console.log(`\n✓ Resultado: ${getSimboloOperacion(nombreOperacion)} ${num} = ${resultado}`);
   }
-}
-
-async function pedirVariosNumeros() {
-  return new Promise((resolve) => {
-    rl.question(
-      "Ingresá varios números (separados por coma, espacio o punto y coma): ",
-      (respuesta) => {
-        const numeros = respuesta
-          .replace(/[,;]+/g, " ") // reemplazo ',' y ';' por espacio
-          .trim() // quito los espacios al principio y final del string
-          .split(/\s+/) // divido los caracteres por uno o más espacios y se van pasando a un array
-          .map((num) => parseFloat(num)) // convierto los caracteres a numeros (float para ser exactos)
-          .filter((num) => !isNaN(num)); // saco del listado los valores que no son numeros
-
-        resolve(numeros);
-      }
-    );
-  });
 }
 
 function getSimboloOperacion(nombre) {
@@ -101,10 +99,12 @@ function getSimboloOperacion(nombre) {
     multiplicación: "×",
     división: "÷",
     potencia: "^",
+    raizCuadrada: "√",
     resto: "mod",
-    "logaritmo natural": "ln",
-    "logaritmo base 10": "log10",
+    logaritmoNatural: "ln",
+    logaritmoBase10: "log[10]",
     porcentaje: "%",
+    maximo: "max",
   };
   return simbolos[nombre] || "";
 }
@@ -121,9 +121,7 @@ async function ejecutarOpcion(opcion) {
 
     case "3":
       await operacionDosNumeros(
-        (a, b) => calc.multiplicar(a, b),
-        "multiplicación"
-      );
+        (a, b) => calc.multiplicar(a, b), "multiplicación");
       break;
 
     case "4":
@@ -131,19 +129,22 @@ async function ejecutarOpcion(opcion) {
       break;
 
     case "5":
-      const base = await pedirNumero("Ingrese la base: ");
-      const exponente = await pedirNumero("Ingrese el exponente: ");
-      const resultadoPot = calc.potencia(base, exponente);
+      // const base = await pedirNumero("Ingrese la base: ");
+      // const exponente = await pedirNumero("Ingrese el exponente: ");
+      // const resultadoPot = calc.potencia(base, exponente);
 
-      if (resultadoPot === undefined) {
-        console.log("\n⚠️  La función potencia aún no está implementada");
-      } else {
-        console.log(`\n✓ Resultado: ${base}^${exponente} = ${resultadoPot}`);
-      }
+      // if (resultadoPot === undefined) {
+      //   console.log("\n⚠️  La función potencia aún no está implementada");
+      // } else {
+      //   console.log(`\n✓ Resultado: ${base}^${exponente} = ${resultadoPot}`);
+      // }
+      // break;
+
+      await operacionDosNumeros((base, exponente) => calc.potencia(base, exponente), "potencia");
       break;
 
     case "6":
-      await operacionUnNumero((num) => calc.raizCuadrada(num), "raíz cuadrada");
+      await operacionUnNumero((num) => calc.raizCuadrada(num), "raízCuadrada");
       break;
 
     case "7":
@@ -151,17 +152,11 @@ async function ejecutarOpcion(opcion) {
       break;
 
     case "8":
-      await operacionUnNumero(
-        (num) => calc.logaritmoNatural(num),
-        "logaritmo natural"
-      );
+      await operacionUnNumero((num) => calc.logaritmoNatural(num),"logaritmoNatural");
       break;
 
     case "9":
-      await operacionUnNumero(
-        (num) => calc.logaritmoBase10(num),
-        "logaritmo base 10"
-      );
+      await operacionUnNumero((num) => calc.logaritmoBase10(num),"logaritmoBase10");
       break;
 
     case "10":
@@ -169,17 +164,19 @@ async function ejecutarOpcion(opcion) {
       break;
 
     case "11":
-      const numeros = await pedirVariosNumeros();
-      if (numeros.length === 0) {
-        console.log("No ingresaste números válidos.");
-        break;
-      }
-      const resultadoMax = calc.maximo(numeros);
-      if (resultadoMax === undefined) {
-        console.log("La función máximo aún no está implementada");
-      } else {
-        console.log(`Resultado: El número máximo es ${resultadoMax}`);
-      }
+      // const numeros = await pedirVariosNumeros();
+      // if (numeros.length === 0) {
+      //   console.log("No ingresaste números válidos.");
+      //   break;
+      // }
+      // const resultadoMax = calc.maximo(numeros);
+      // if (resultadoMax === undefined) {
+      //   console.log("La función máximo aún no está implementada");
+      // } else {
+      //   console.log(`Resultado: El número máximo es ${resultadoMax}`);
+      // }
+      // break;
+      await operacionVariosNumeros((numeros) => calc.maximo(numeros), "maximo");
       break;
 
     case "0":

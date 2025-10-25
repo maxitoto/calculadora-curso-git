@@ -24,6 +24,7 @@ function mostrarMenu() {
   console.log("10. Porcentaje de A sobre B");
   console.log("11. Valor máximo de varios números");
   console.log("12. Factorial");
+  console.log("13. Promedio de varios números");
   console.log("0. Salir");
   console.log("=================================");
 }
@@ -106,7 +107,11 @@ function getSimboloOperacion(nombre) {
     logaritmoBase10: "log[10]",
     porcentaje: "%",
     maximo: "max",
+<<<<<<< HEAD
     factorial: "!",
+=======
+    promedio: "avg",
+>>>>>>> Cristian
   };
   return simbolos[nombre] || "";
 }
@@ -148,6 +153,9 @@ async function ejecutarOpcion(opcion) {
       break;
     case "12":
       await operacionUnNumero((num) => calc.factorial(num), "factorial");
+      break;
+    case "13":
+      await operacionVariosNumeros((numeros) => calc.promedio(numeros), "promedio");
       break;
     case "0":
       console.log("\n¡Hasta luego! 👋");

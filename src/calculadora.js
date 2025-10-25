@@ -55,6 +55,18 @@ class Calculadora {
     if (!Array.isArray(arr) || arr.length === 0) return "Error";
     return Math.max(...arr);
   }
+
+  promedio(arr) {
+    // Validaciones básicas (mismo criterio que maximo)
+    if (!Array.isArray(arr) || arr.length === 0) return "Error";
+
+    // Convertimos a números y validamos que no haya NaN/infinitos
+    const nums = arr.map(Number);
+    if (nums.some(n => !Number.isFinite(n))) return "Error";
+
+    const suma = nums.reduce((acc, n) => acc + n, 0);
+    return parseFloat((suma / nums.length).toFixed(3));
+  }
 }
 
 // Exportar para usar en tests
@@ -79,5 +91,5 @@ console.log("- calc.resto(a, b)");
 console.log("- calc.logaritmoNatural(numero)");
 console.log("- calc.logaritmoBase10(numero)");
 console.log("- calc.porcentaje(a, b)");
-
-
+console.log("- calc.maximo(arr)");
+console.log("- calc.promedio(arr)");

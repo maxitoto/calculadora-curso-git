@@ -23,6 +23,7 @@ function mostrarMenu() {
   console.log("9. Logaritmo base 10");
   console.log("10. Porcentaje de A sobre B");
   console.log("11. Valor máximo de varios números");
+  console.log("12. Promedio de varios números");
   console.log("0. Salir");
   console.log("=================================");
 }
@@ -105,6 +106,7 @@ function getSimboloOperacion(nombre) {
     logaritmoBase10: "log[10]",
     porcentaje: "%",
     maximo: "max",
+    promedio: "avg",
   };
   return simbolos[nombre] || "";
 }
@@ -177,6 +179,10 @@ async function ejecutarOpcion(opcion) {
       // }
       // break;
       await operacionVariosNumeros((numeros) => calc.maximo(numeros), "maximo");
+      break;
+
+    case "12":
+      await operacionVariosNumeros((numeros) => calc.promedio(numeros), "promedio");
       break;
 
     case "0":

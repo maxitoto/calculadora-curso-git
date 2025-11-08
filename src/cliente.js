@@ -107,11 +107,8 @@ function getSimboloOperacion(nombre) {
     logaritmoBase10: "log[10]",
     porcentaje: "%",
     maximo: "max",
-<<<<<<< HEAD
     factorial: "!",
-=======
     promedio: "avg",
->>>>>>> Cristian
   };
   return simbolos[nombre] || "";
 }

@@ -29,6 +29,10 @@ class Calculadora {
     return this._historial.slice();
   }
 
+  limpiarHistorial() {
+    this._historial.length = 0;
+  }
+
   sumar(a, b) {
     return a + b;
   }

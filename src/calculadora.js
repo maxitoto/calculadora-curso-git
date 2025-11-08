@@ -25,6 +25,10 @@ class Calculadora {
     });
   }
 
+  getHistorial() {
+    return this._historial.slice();
+  }
+
   sumar(a, b) {
     return a + b;
   }

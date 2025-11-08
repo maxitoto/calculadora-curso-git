@@ -1,4 +1,30 @@
 class Calculadora {
+  constructor() {
+    this._historial = [];
+    const ignorar = new Set(['getHistorial', 'limpiarHistorial', 'constructor']);
+    const self = this;
+    return new Proxy(this, {
+      get(target, prop, receiver) {
+        const value = Reflect.get(target, prop, receiver);
+        if (typeof value === 'function' && !ignorar.has(prop)) {
+          return (...args) => {
+            const resultado = value.apply(target, args);
+            try {
+              self._historial.push({
+                timestamp: new Date().toISOString(),
+                operacion: String(prop),
+                argumentos: args,
+                resultado: resultado,
+              });
+            } catch (_) {}
+            return resultado;
+          };
+        }
+        return value;
+      }
+    });
+  }
+
   sumar(a, b) {
     return a + b;
   }

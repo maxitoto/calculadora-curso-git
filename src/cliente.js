@@ -25,6 +25,8 @@ function mostrarMenu() {
   console.log("11. Valor máximo de varios números");
   console.log("12. Factorial");
   console.log("13. Promedio de varios números");
+  console.log("14. Ver historial de operaciones");
+  console.log("15. Limpiar historial de operaciones");
   console.log("0. Salir");
   console.log("=================================");
 }
@@ -82,7 +84,6 @@ async function operacionVariosNumeros(operacion, nombreOperacion) {
 
 async function operacionUnNumero(operacion, nombreOperacion) {
   const num = await pedirNumero("Ingrese el número: ");
-
   const resultado = operacion(num);
 
   if (resultado === undefined) {
@@ -111,6 +112,28 @@ function getSimboloOperacion(nombre) {
     promedio: "avg",
   };
   return simbolos[nombre] || "";
+}
+
+function verHistorial() {
+  const h = calc.getHistorial();
+  if (h.length === 0) {
+    console.log("\n(i) Historial vacío.");
+    return;
+  }
+  console.log("\n=== Historial de operaciones ===");
+  h.forEach((item, idx) => {
+    const args = Array.isArray(item.argumentos)
+        ? JSON.stringify(item.argumentos)
+        : String(item.argumentos);
+    console.log(
+        `${idx + 1}. [${item.timestamp}] ${item.operacion}(${args}) => ${item.resultado}`
+    );
+  });
+}
+
+function limpiarHistorial() {
+  calc.limpiarHistorial();
+  console.log("\nHistorial limpiado.");
 }
 
 async function ejecutarOpcion(opcion) {
@@ -153,6 +176,12 @@ async function ejecutarOpcion(opcion) {
       break;
     case "13":
       await operacionVariosNumeros((numeros) => calc.promedio(numeros), "promedio");
+      break;
+    case "14":
+      verHistorial();
+      break;
+    case "15":
+      limpiarHistorial();
       break;
     case "0":
       console.log("\n¡Hasta luego! 👋");

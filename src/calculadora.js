@@ -50,7 +50,7 @@ class Calculadora {
     if (b === 0) return "Error";
     return (a / b) * 100;
   }
-
+// funcion agregada para punto 2 (PR) -ReynaldoI
   maximo(arr) {
     if (!Array.isArray(arr) || arr.length === 0) return "Error";
     return Math.max(...arr);
